@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { dogsData } from "./data";
-import DogListItem from "./components/DogListItem";
-import NewDogForm from "./components/NewDogForm";
+import DogListItem from "./Components/DogListItem";
+import NewDogForm from "./Components/NewDogForm";
 
 function App() {
   const [dogs, setDogs] = useState(dogsData);
@@ -36,12 +36,24 @@ function App() {
           <button onClick={toggleNewDogForm}>
             {showNewDogForm ? "hide form" : "Add a new dog"}
           </button>
-          {showNewDogForm ? <NewDogForm /> : null}
+          {showNewDogForm ? (
+            <NewDogForm
+              handleAddDog={handleAddDog}
+              toggleNewDogForm={toggleNewDogForm}
+            />
+          ) : null}
         </div>
         <div>
           <ul>
             {dogs.map((dog) => {
-              return <DogListItem dog={dog} key={dog.id} />;
+              return (
+                <DogListItem
+                  key={dog.id}
+                  dog={dog}
+                  updateDogAttendance={updateDogAttendance}
+                  removeDog={removeDog}
+                />
+              );
             })}
           </ul>
         </div>
